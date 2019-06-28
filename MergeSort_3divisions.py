@@ -6,18 +6,22 @@ def merge(arr, newarr):
         L = arr[:n]
         M = arr[n:2*n]
         R = arr[2*n:]
+
         print('n is ', n)
         print('L is ', L)
         print('M is ', M)
         print('R is ', R)
-        L_len = L.shape[0]
         M_len = M.shape[0]
         R_len = R.shape[0]
-
+        L_len = L.shape[0]
+        
         merge(L, newarr)
         merge(M, newarr)
         merge(R, newarr)
-
+        if n ==1:
+            L = newarr[:n]
+            M = newarr[n:2*n]
+            R = newarr[2*n:]
         i, j, k, l = 0,0,0,0
 
         # first, we need to compare values and sort for all 3
@@ -29,13 +33,14 @@ def merge(arr, newarr):
                 newarr[l] = M[j]
                 j += 1
             elif R[k] < L[i] and R[k] < M[j]:
+                print('R is',R)
                 newarr[l] = R[k]
                 k += 1
             else:
                 print('Something is wrong - 1')
 
             l += 1
-
+        # issue is that the final re-copying is being done on the origina arrays and not the new ones
         # now compare and sort for the remaining 2, if they exist
         if i == L_len:
             newarr, M, R, j, k, l = sort2(newarr, M, R, j, k, l)
@@ -58,9 +63,9 @@ def merge(arr, newarr):
             newarr[l] = R[k]
             k+=1
             l+=1
-
+        print('n is',n)
         print('new array is - double merge',newarr)
-        return newarr
+    return newarr
 
 def sort2(newarr, subarr1, subarr2, subarr1_index, subarr2_index, arr_index):
     # print('new arr is before sort2',newarr)

@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-def Search(arr, n, odd):
+def Search(arr, n, odd, low, high):
     if odd:
         print('n is',n)
         if arr[n-1] < n-1:
@@ -14,7 +14,7 @@ def Search(arr, n, odd):
             n = math.floor(n/2)
             odd = False
             print('n is now ',n)
-            Search(arr, n, odd)
+            Search(arr, n, odd, low, high)
         else:
             print('Something is wrong')
     print('The array is',arr)
@@ -23,21 +23,20 @@ def Search(arr, n, odd):
         print('searching upper')
         odd = True
         print('The array will be ',arr[n:])
-        Search(arr[n:], n, odd) #search upper
+        Search(arr[n:], n, odd, low, high) #search upper
     elif arr[n] == n:
         print('Answer is index ', n)
     elif arr[n] > n:
         print('searching lower')
         odd = True
         print('The array will be', arr[:n])
-        Search(arr[:n], n, odd) #search lower
+        Search(arr[:n], n, odd, low, high) #search lower
     else:
         print('Something is wrong')
 
-# try using a pointer with min and max instead of chopping the array
-
 if __name__ == '__main__':
     # A1 = [-2,-1,1,2,3,5]
-    A1 = [-2,-1,1,2,4,8]
+    # A1 = [0,3,4,5,7,9]
+    A1 = [-2,-1,0,1,2,5,11,13,14,15,17,19]
     A1_np = np.asarray(A1)
-    Search(A1_np, A1_np.shape[0], odd=True)
+    Search(A1_np, A1_np.shape[0], odd=True, low=0, high=A1_np.shape[0])

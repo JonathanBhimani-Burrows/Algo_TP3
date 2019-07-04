@@ -50,7 +50,7 @@ def merge(arr):
             l+=1
     return arr
 
-
+# 2 element sort function - this is performed the same way a regular merge sort would be done
 def sort2(arr, subarr1, subarr2, subarr1_index, subarr2_index, arr_index):
     while subarr1_index < len(subarr1) and subarr2_index < len(subarr2):
         if subarr1[subarr1_index] < subarr2[subarr2_index]:
